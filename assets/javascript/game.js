@@ -1,5 +1,13 @@
 var songs = ["For Your Life", "The Song Remains the Same", "In the Evening", "Good Times Bad Times", "Ten Years Gone", "The Wanton Song", "Your Time is Gonna Come", "All My Love", "Houses of the Holy", "Thank You", "Custard Pie", "Since I've Been Loving You"];
-var test = "since I've Been Loving You";
+var alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+function createButtons() {
+    for(i = 0; i < alpha.length; i++){
+        newBtn = document.createElement("div");
+        newBtn.innerHTML = alpha[i];
+        document.getElementById("guessed").append(newBtn);
+    }
+}
 
 function pickWord() {
     return songs[Math.floor(Math.random() * songs.length)]
@@ -29,12 +37,11 @@ function setBoard(word) {
     }
 }
 
+createButtons();
+
 word = pickWord();
-console.log(word);
+
 setBoard(word);
 
 
 
-document.onload(function() {
-    
-})
