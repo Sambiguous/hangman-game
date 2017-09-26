@@ -21,12 +21,21 @@
  
         </div>
         <div class="row">
-            <div class="col-md-4" id="hangman">
+            <div class="col-lg-4 col-md-3 hidden-xs" id="hangman">
                 <img src="assets/images/hangman.png"/>
             </div>
-            <div class="col-md-8">
-                <div class="row" id="guessed"></div>
-                <div id="letters"></div>
+            <div class="col-lg-8 col-md-9">
+                <div class="row">
+                    <div class="col-lg-8 col-md-9 text-center" id="guessed"></div>
+                    <div class="col-lg-4 col-md-3 text-center" id="scoreboard">
+                        <p>Wins: <span id="wins">0</span></p>
+                        <p>Losses: <span id="losses">0</span></p>
+                    </div>
+                  
+                </div>
+                <div class="text-center" id="letter-container">
+                    <div id="letters"></div>
+                </div>
             </div>
         </div>
         <script src="assets/javascript/game.js"></script>
