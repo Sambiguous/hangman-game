@@ -7,12 +7,17 @@
     vertical-align: middle;
 }
 
+.test {
+    border: 1px solid black;
+}
+
 .letter-btn p {
     font-weight: bold;
     margin-top: 6px;
 }
 
 #letters {
+    margin: 0px auto;
     text-align: left;
 }
 
@@ -49,5 +54,36 @@
 
 #subtext {
     text-shadow: 1px 1px 4px black;
+}
+
+@media only screen and (min-width: 991px){
+    #letters {
+        position: relative;
+        top: 200px;
+
+    } 
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #hangman img{
+        height: 400px;
+        width: auto;
+    }
+
+    #guessed {
+        position: relative;
+        bottom: 378px;
+        left: 133px;
+    }
+
+    #scoreboard {
+        position: relative;
+        bottom: 370px;
+    }
+
+    #letters {
+        position: relative;
+        bottom: 100px;
+    }
 }
 
