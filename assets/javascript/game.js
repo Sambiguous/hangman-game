@@ -39,6 +39,8 @@ function createButtons() {  //still need to map 'click' to each button
         newBtn = document.createElement("button");
         newBtn.classList.add("letter-btn");
         newBtn.setAttribute("onclick", "buttonPress('" + alpha[i].toString() + "');");
+        //newBtn.addEventListener("click", function(){buttonPress(alpha[i])});  // WHAT THE F**K IS GOING ON HERE
+        //newBtn.onclick = function() {buttonPress(alpha[i])};                  // WHAT THE F**K IS GOING ON HERE
         newBtn.innerHTML = "<p>" + alpha[i] + "</p>";
         gsd.append(newBtn);
     }
