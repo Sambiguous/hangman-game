@@ -32,6 +32,12 @@
     text-align: center;
 }
 
+.punc {
+    color: black;
+    border-bottom: unset;
+    width: 5px;
+}
+
 .word {
     margin: 0px 10px;
     display: inline-block;
