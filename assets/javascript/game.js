@@ -1,8 +1,11 @@
 var songs = ["For Your Life", "The Song Remains the Same", "In the Evening", "Good Times Bad Times", "Ten Years Gone", "The Wanton Song", "Your Time is Gonna Come", "All My Love", "Houses of the Holy", "Thank You", "Custard Pie", "Since I've Been Loving You"];
 var alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var wins = 0;
+var losses = 0;
 var round_array = [];
 var shadow_array = [];
 var wrong_count = 0;
+var round_over = false;
 
 
 function updateBlanks() {  //updates the blank spaces to show letters that have been pressed
@@ -17,7 +20,9 @@ function updateBlanks() {  //updates the blank spaces to show letters that have 
 
 function buttonPress(btn) {
     var wrong = true;
-    
+
+    if(round_over){return};
+
     for(i = 0; i < round_array.length; i++) {
         for(k = 0; k < round_array[i].length; k++) {
             if(btn == round_array[i][k].toUpperCase()) {
@@ -30,17 +35,34 @@ function buttonPress(btn) {
         }
     }
 
-    if(wrong){
-        if(wrong_count < 6){wrong_count += 1};
-        console.log(wrong_count);
+    if(wrong){ //executes if letter pressed was not found in the round_array
+        wrong_count += 1
         document.getElementById("b" + btn).classList.add("wrong");
         img_url = "assets/images/hangman" + wrong_count.toString() + ".png";
-        console.log(img_url);
         document.getElementById("gallows").setAttribute("src", img_url);
+
+        if(wrong_count > 5){
+            round_over = true;
+            losses ++;
+            setTimeout(function(){
+                again = confirm("You lost!, would you like to play again?");
+                if(again){newGame()}
+            }, 50)
+        }
     }
 
-    updateBlanks();
+    else{
+        if(compareArrays(round_array, shadow_array)){
+            round_over = true;
+            wins ++;
+            setTimeout(function(){
+                again = confirm("You Won!, would you like to play again?");
+                if(again){newGame()};
+            }, 50);
+        };
+    };
 
+    updateBlanks();
 };
 
 function createButtons() {
@@ -71,6 +93,17 @@ function resetButtons() {  //resets button classes to default
     }
 };
 
+function compareArrays(arr1, arr2){
+    for(var i = 0; i < arr1.length; i++){
+        for(var k = 0; k < arr1[i].length; k++){
+            if(arr1[i][k] != arr2[i][k]){
+                return false;
+            }
+        }
+    };
+    return true;
+}
+
 function pickWord() {
     return songs[Math.floor(Math.random() * songs.length)]
 };
@@ -93,10 +126,19 @@ function createShadowArray(template) {  //creates shadow of current round's answ
     return shadow;
 };
 
+function createRoundArray(word){
+    var output = word.split(" ");
+    for(i = 0; i < output.length; i++){
+        output[i] = output[i].split("");
+    };
+    return output;
+}
+
 function setBoard(word) {   // populates the '#blankContainer' div with blanks to match the round's answer
    
-    round_array = word.split(" ");                   //split 'word' parameter into an array
+    round_array = createRoundArray(word);
     shadow_array = createShadowArray(round_array);
+
     for(wrd = 0; wrd < round_array.length; wrd++) {  //create one div per element in the 'round_array' array
 
         wrdDiv = document.createElement("div");
@@ -133,6 +175,7 @@ function clearBlanks() {
 }
 
 function newGame() {
+    round_over = false;
     wrong_count = 0;
     document.getElementById("gallows").setAttribute("src", "assets/images/hangman.png");
     clearBlanks();
@@ -152,10 +195,7 @@ window.onload = function(){
 
 
 //next things:
-//create win and loss conditions
-//loss: checks wrong count after every wrong button press, if == 6 then do something
-//win: compares shadow and round arrays after every correct button press, if equal then do something
-
+//display wins and loss variables on page
 
 
 
