@@ -5,7 +5,7 @@ var shadow_array = [];
 var wrong_count = 0;
 
 
-function updateBlanks() {  //works as intended
+function updateBlanks() {  //updates the blank spaces to show letters that have been pressed
     for(i = 0; i < round_array.length; i++) {
         for(k = 0; k < round_array[i].length; k++) {
             divID = i.toString() + k.toString();
@@ -31,13 +31,14 @@ function buttonPress(btn) {
     }
 
     if(wrong){
-        wrong_count += 1;
+        if(wrong_count < 6){wrong_count += 1};
         console.log(wrong_count);
         document.getElementById("b" + btn).classList.add("wrong");
         img_url = "assets/images/hangman" + wrong_count.toString() + ".png";
         console.log(img_url);
         document.getElementById("gallows").setAttribute("src", img_url);
     }
+
     updateBlanks();
 
 };
@@ -92,34 +93,26 @@ function createShadowArray(template) {  //creates shadow of current round's answ
     return shadow;
 };
 
-function setBoard(word) {   // populates the '#letters' div with blanks to match the round's answer
-    //split 'word' parameter into an array
-    round_array = word.split(" ");
+function setBoard(word) {   // populates the '#blankContainer' div with blanks to match the round's answer
+   
+    round_array = word.split(" ");                   //split 'word' parameter into an array
     shadow_array = createShadowArray(round_array);
-    //create one div per element in the 'round_array' array
-    for(wrd = 0; wrd < round_array.length; wrd++) {
-        //create new div
+    for(wrd = 0; wrd < round_array.length; wrd++) {  //create one div per element in the 'round_array' array
+
         wrdDiv = document.createElement("div");
-        //assign class 'word'
         wrdDiv.classList.add("word");
-        //assign id 'word' plus number
         wrd_id = "word" + wrd;
         wrdDiv.id = wrd_id
-        //append new div to 'letters' div
-        document.getElementById("letters").append(wrdDiv);
-        //create one div per character in each word
+        document.getElementById("blankContainer").append(wrdDiv);
+        
         for(ltr = 0; ltr < round_array[wrd].length; ltr++) {
-            //create div
             ltrDiv = document.createElement("div");
-            //assign 'letter' class
             ltrDiv.classList.add("letter");
-            //set div id equal to the array index as a string
             ltrDiv.id = wrd.toString() + ltr.toString();
-            //set initial html
             ltrDiv.innerHTML = shadow_array[wrd][ltr];
 
         
-            if( !(alpha.includes(round_array[wrd][ltr].toUpperCase())) ) {
+            if( !(alpha.includes(round_array[wrd][ltr].toUpperCase())) ) { // if the thing in the word array is not a letter, assign the .punc class
                 ltrDiv.classList.add("punc");
                 ltrDiv.innerHTML = round_array[wrd][ltr];
             };
@@ -130,12 +123,8 @@ function setBoard(word) {   // populates the '#letters' div with blanks to match
     }
 };
 
-function clearChildren() {
-    var btns = document.getElementById("guessed");
-    var words = document.getElementById("letters");
-    while (btns.firstChild) {
-        btns.removeChild(btns.firstChild);
-    };
+function clearBlanks() {
+    var words = document.getElementById("blankContainer");
 
     while (words.firstChild) {
         words.removeChild(words.firstChild);
@@ -146,8 +135,7 @@ function clearChildren() {
 function newGame() {
     wrong_count = 0;
     document.getElementById("gallows").setAttribute("src", "assets/images/hangman.png");
-    clearChildren();
-    createButtons();
+    clearBlanks();
     resetButtons();
     word = pickWord();
     setBoard(word);
@@ -156,13 +144,17 @@ function newGame() {
 
 window.onload = function(){
         createButtons();
-        resetButtons();
         word = pickWord();
         setBoard(word);
 
 
 };
 
+
+//next things:
+//create win and loss conditions
+//loss: checks wrong count after every wrong button press, if == 6 then do something
+//win: compares shadow and round arrays after every correct button press, if equal then do something
 
 
 
