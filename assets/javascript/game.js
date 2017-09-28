@@ -2,7 +2,8 @@ var songs = ["For Your Life", "The Song Remains the Same", "In the Evening", "Go
 var alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var round_array = [];
 var shadow_array = [];
-var test = "Since I've Been Loving You";
+var wrong_count = 0;
+
 
 function updateBlanks() {  //works as intended
     for(i = 0; i < round_array.length; i++) {
@@ -15,29 +16,42 @@ function updateBlanks() {  //works as intended
 };
 
 function buttonPress(btn) {
-    console.log("clicked");
-    console.log(btn);
+    var wrong = true;
+    
     for(i = 0; i < round_array.length; i++) {
         for(k = 0; k < round_array[i].length; k++) {
             if(btn == round_array[i][k].toUpperCase()) {
                 shadow_array[i][k] = round_array[i][k];
                 document.getElementById(i.toString() + k.toString()).classList.add("picked");
+                document.getElementById("b" + btn).classList.add("right");
+                wrong = false;
+
             }
         }
+    }
+
+    if(wrong){
+        wrong_count += 1;
+        console.log(wrong_count);
+        document.getElementById("b" + btn).classList.add("wrong");
+        img_url = "assets/images/hangman" + wrong_count.toString() + ".png";
+        console.log(img_url);
+        document.getElementById("gallows").setAttribute("src", img_url);
     }
     updateBlanks();
 
 };
 
-function createButtons() {  //still need to map 'click' to each button
+function createButtons() {
     for(i = 0; i < alpha.length; i++){
         gsd = document.getElementById("guessed")
         if(i == 13){
             //append <br> element to split up buttons
             gsd.append(document.createElement("br"));
         }
-        newBtn = document.createElement("button");
+        var newBtn = document.createElement("button");
         newBtn.classList.add("letter-btn");
+        newBtn.id = "b" + alpha[i];
         newBtn.setAttribute("onclick", "buttonPress('" + alpha[i].toString() + "');");
         //newBtn.addEventListener("click", function(){buttonPress(alpha[i])});  // WHAT THE F**K IS GOING ON HERE
         //newBtn.onclick = function() {buttonPress(alpha[i])};                  // WHAT THE F**K IS GOING ON HERE
@@ -45,6 +59,17 @@ function createButtons() {  //still need to map 'click' to each button
         gsd.append(newBtn);
     }
 };
+
+function resetButtons() {  //resets button classes to default
+    btns = document.getElementById("guessed");
+    children = btns.children;
+    for(i = 0; i < children.length; i++){
+        child = children[i];
+        child.classList.remove("right");
+        child.classList.remove("wrong");
+    }
+};
+
 function pickWord() {
     return songs[Math.floor(Math.random() * songs.length)]
 };
@@ -71,8 +96,6 @@ function setBoard(word) {   // populates the '#letters' div with blanks to match
     //split 'word' parameter into an array
     round_array = word.split(" ");
     shadow_array = createShadowArray(round_array);
-    console.log(round_array);
-    console.log(shadow_array);
     //create one div per element in the 'round_array' array
     for(wrd = 0; wrd < round_array.length; wrd++) {
         //create new div
@@ -95,7 +118,7 @@ function setBoard(word) {   // populates the '#letters' div with blanks to match
             //set initial html
             ltrDiv.innerHTML = shadow_array[wrd][ltr];
 
-            
+        
             if( !(alpha.includes(round_array[wrd][ltr].toUpperCase())) ) {
                 ltrDiv.classList.add("punc");
                 ltrDiv.innerHTML = round_array[wrd][ltr];
@@ -107,13 +130,38 @@ function setBoard(word) {   // populates the '#letters' div with blanks to match
     }
 };
 
+function clearChildren() {
+    var btns = document.getElementById("guessed");
+    var words = document.getElementById("letters");
+    while (btns.firstChild) {
+        btns.removeChild(btns.firstChild);
+    };
+
+    while (words.firstChild) {
+        words.removeChild(words.firstChild);
+    };
+
+}
+
+function newGame() {
+    wrong_count = 0;
+    document.getElementById("gallows").setAttribute("src", "assets/images/hangman.png");
+    clearChildren();
+    createButtons();
+    resetButtons();
+    word = pickWord();
+    setBoard(word);
+};
 
 
-createButtons();
+window.onload = function(){
+        createButtons();
+        resetButtons();
+        word = pickWord();
+        setBoard(word);
 
-word = pickWord();
 
-setBoard(word);
+};
 
 
 

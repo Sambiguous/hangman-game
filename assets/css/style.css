@@ -16,6 +16,14 @@
     margin-top: 6px;
 }
 
+.right{
+    color: green;
+}
+
+.wrong {
+    color: red;
+}
+
 #letters {
     margin: 0px auto;
     text-align: left;
