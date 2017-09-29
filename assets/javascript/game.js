@@ -36,6 +36,19 @@ function updateScoreboard(){//self explanatory really
     document.getElementById("losses").innerHTML = losses;
 }
 
+function fillBlanksAfterLoss(){
+    for(i = 0; i < round_array.length; i++){
+        for(k = 0; k < round_array[i].length; k++){
+            var id = i.toString() + k.toString();
+            var blank = document.getElementById(id)
+            if(blank.innerHTML == "0"){
+                blank.classList.add("faded");
+                blank.innerHTML = round_array[i][k];
+            }
+        }
+    }
+}
+
 function buttonPress(btn) {//main game function, executed every time a button is pressed
     var wrong = true;
 
@@ -63,11 +76,12 @@ function buttonPress(btn) {//main game function, executed every time a button is
         if(wrong_count > 5){
             round_over = true;
             losses ++;
+            fillBlanksAfterLoss();
             updateScoreboard();
             setTimeout(function(){
                 again = confirm("You lost!, would you like to play again?");
                 if(again){newGame()}
-            }, 50)
+            }, 100)
         }
     }
 
@@ -79,7 +93,7 @@ function buttonPress(btn) {//main game function, executed every time a button is
             setTimeout(function(){
                 again = confirm("You Won!, would you like to play again?");
                 if(again){newGame()};
-            }, 50);
+            }, 100);
         };
     };
     picked_array.push(btn);
