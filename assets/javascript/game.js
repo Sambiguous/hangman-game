@@ -1,4 +1,15 @@
-var songs = ["For Your Life", "The Song Remains the Same", "In the Evening", "Good Times Bad Times", "Ten Years Gone", "The Wanton Song", "Your Time is Gonna Come", "All My Love", "Houses of the Holy", "Thank You", "Custard Pie", "Since I've Been Loving You"];
+var songs = ["For Your Life", "The Song Remains the Same", "In the Evening",
+"Good Times Bad Times", "Ten Years Gone", "The Wanton Song", "Your Time is Gonna Come",
+"All My Love", "Houses of the Holy", "Thank You", "Custard Pie", "Since I've Been Loving You",
+"In the Light", "The Rain Song", "For Sticks", "Bron-Y-Aur Stomp", "The Rover", "the Ocean",
+"You Shook Me", "The Battle of Evermore", "Fool in the Rain", "Celebration Day", "Nobody's Fault But Mine",
+"Communication Breakdown", "Bring it on Home", "Out on the Tiles", "What is and What Shoud Be",
+"Immigrant Song", "Achilles' Last Stand", "Heartbreaker / Living Loving Maid", "Gollows Pole",
+"Dancing Days", "Friends", "Going to California", "Trampled Underfoot", "Babe, I'm Gonna Leave You",
+"Over the Hills and Far Away", "When the Levee Breaks", "That's the Way", "Rock and Roll",
+"No Quarter", "How Many More Times", "Misty Mountain Hop", "Ramble On", "In My Time of Dying",
+"Dazed and Confused", "Black Dog", "Stairway to Heaven", "Whole Lotta Love", "Kashmir"];
+
 var alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var wins = 0;
 var losses = 0;
@@ -7,7 +18,8 @@ var round_array = [];
 var shadow_array = [];
 var wrong_count = 0;
 var round_over = false;
-
+var test = "Bron-Y-Aur Stomp";
+var test1 = "Heartbreaker / Living Loving Maid";
 
 function updateBlanks() {  //updates the blank spaces to show letters that have been pressed
     for(i = 0; i < round_array.length; i++) {
@@ -190,8 +202,7 @@ function newGame() {//reset all the things and initialize a new game
     document.getElementById("gallows").setAttribute("src", "assets/images/hangman.png");
     clearBlanks();
     resetButtons();
-    song = pickSong();
-    setBoard(song);
+    setBoard(pickSong());
 };
 
 
