@@ -50,7 +50,7 @@
 }
 
 .right{
-    color: green;
+    background-color: green;
 }
 
 #scoreboard h3 {
@@ -68,7 +68,7 @@
 }
 
 .wrong {
-    color: red;
+    background-color: red;
 }
 
 .word {
