@@ -26,7 +26,8 @@ function updateBlanks() {  //updates the blank spaces to show letters that have 
         for(k = 0; k < round_array[i].length; k++) {
             divID = i.toString() + k.toString();
             divToUpdate = document.getElementById(divID);
-            divToUpdate.innerHTML = shadow_array[i][k];
+            //divToUpdate.innerHTML = shadow_array[i][k];
+            divToUpdate.innerHTML = "<p>" +  shadow_array[i][k] + "</p>";
         }
     }
 };
@@ -36,17 +37,18 @@ function updateScoreboard(){//self explanatory really
     document.getElementById("losses").innerHTML = losses;
 }
 
-function fillBlanksAfterLoss(){
+function fillBlanksAfterLoss(){//populates the blank spaces after a loss to show what the correct answer was
     for(i = 0; i < round_array.length; i++){
         for(k = 0; k < round_array[i].length; k++){
             var id = i.toString() + k.toString();
             var blank = document.getElementById(id)
-            if(blank.innerHTML == "0"){
+            if(blank.innerHTML == "<p>0</p>"){
                 blank.classList.add("faded");
-                blank.innerHTML = round_array[i][k];
+                blank.classList.add("picked");
             }
         }
     }
+    shadow_array = round_array;
 }
 
 function buttonPress(btn) {//main game function, executed every time a button is pressed
@@ -112,7 +114,7 @@ function createButtons() {//creates the buttons that the user clicks to guess a 
         newBtn.id = "b" + alpha[i];
         newBtn.setAttribute("onclick", "buttonPress('" + alpha[i].toString() + "');");
         //newBtn.addEventListener("click", function(){buttonPress(alpha[i])});  //These two lines make no sense
-        //newBtn.onclick = function() {buttonPress(alpha[i])};                  //they should work, but don't
+        //newBtn.onclick = function() {buttonPress(alpha[i])};                  //they should work, but don't.
         newBtn.innerHTML = "<p>" + alpha[i] + "</p>";
         gsd.append(newBtn);
     }
