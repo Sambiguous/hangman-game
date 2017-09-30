@@ -1,3 +1,7 @@
+#dark {
+    color: #333;
+}
+
 .faded p {
     color: red;
     opacity: 0.5;
@@ -67,7 +71,8 @@
     border-bottom: unset;
 }
 
-.subtext {
+#subtext {
+    margin-left: 4px;
     text-shadow: 1px 1px 4px black;
     color: #d3d3d3;
     opacity: .8;
