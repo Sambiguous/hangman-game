@@ -67,9 +67,10 @@
     border-bottom: unset;
 }
 
-#subtext {
+.subtext {
     text-shadow: 1px 1px 4px black;
     color: #d3d3d3;
+    opacity: .8;
 }
 
 .wrong {

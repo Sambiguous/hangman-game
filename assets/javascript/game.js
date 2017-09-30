@@ -1,9 +1,9 @@
 var songs = ["For Your Life", "The Song Remains the Same", "In the Evening",
 "Good Times Bad Times", "Ten Years Gone", "The Wanton Song", "Your Time is Gonna Come",
 "All My Love", "Houses of the Holy", "Thank You", "Custard Pie", "Since I've Been Loving You",
-"In the Light", "The Rain Song", "For Sticks", "Bron-Y-Aur Stomp", "The Rover", "the Ocean",
+"In the Light", "The Rain Song", "Four Sticks", "Bron-Y-Aur Stomp", "The Rover", "the Ocean",
 "You Shook Me", "The Battle of Evermore", "Fool in the Rain", "Celebration Day", "Nobody's Fault But Mine",
-"Communication Breakdown", "Bring it on Home", "Out on the Tiles", "What is and What Shoud Be",
+"Communication Breakdown", "Bring it on Home", "Out on the Tiles", "What is and What Shoud Never Be",
 "Immigrant Song", "Achilles' Last Stand", "Heartbreaker / Living Loving Maid", "Gollows Pole",
 "Dancing Days", "Friends", "Going to California", "Trampled Underfoot", "Babe, I'm Gonna Leave You",
 "Over the Hills and Far Away", "When the Levee Breaks", "That's the Way", "Rock and Roll",
@@ -226,6 +226,7 @@ window.onload = function(){
         createButtons();
         song = pickSong();
         setBoard(song);
+        //document.getElementById("audio").play()
 };
 
 
