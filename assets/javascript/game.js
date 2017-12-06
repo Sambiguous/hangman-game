@@ -112,7 +112,7 @@ function createButtons() {//creates the buttons that the user clicks to guess a 
         var newBtn = document.createElement("button");
         newBtn.classList.add("letter-btn");
         newBtn.id = "b" + alpha[i];
-        newBtn.setAttribute("onclick", "buttonPress('" + alpha[i].toString() + "');");
+        newBtn.setAttribute("onclick", "buttonPress('" + alpha[i] + "');");
         newBtn.innerHTML = "<p>" + alpha[i] + "</p>";
         gsd.append(newBtn);
     }
