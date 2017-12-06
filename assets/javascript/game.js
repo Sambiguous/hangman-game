@@ -4,7 +4,7 @@ var songs = ["For Your Life", "The Song Remains the Same", "In the Evening",
 "In the Light", "The Rain Song", "Four Sticks", "Bron-Y-Aur Stomp", "The Rover", "the Ocean",
 "You Shook Me", "The Battle of Evermore", "Fool in the Rain", "Celebration Day", "Nobody's Fault But Mine",
 "Communication Breakdown", "Bring it on Home", "Out on the Tiles", "What is and What Shoud Never Be",
-"Immigrant Song", "Achilles' Last Stand", "Heartbreaker / Living Loving Maid", "Gollows Pole",
+"Immigrant Song", "Achilles' Last Stand", "Heartbreaker / Living Loving Maid", "Gallows Pole",
 "Dancing Days", "Friends", "Going to California", "Trampled Underfoot", "Babe, I'm Gonna Leave You",
 "Over the Hills and Far Away", "When the Levee Breaks", "That's the Way", "Rock and Roll",
 "No Quarter", "How Many More Times", "Misty Mountain Hop", "Ramble On", "In My Time of Dying",
@@ -21,7 +21,7 @@ var round_over = false;
 var test = "Bron-Y-Aur Stomp";
 var test1 = "Heartbreaker / Living Loving Maid";
 
-function updateBlanks() {  //updates the blank spaces to show letters that have been pressed
+function updateBlanks() {  //updates the blank spaces to show letters that have been pressed; executed each time a new letter is clicked on
     for(i = 0; i < round_array.length; i++) {
         for(k = 0; k < round_array[i].length; k++) {
             divID = i.toString() + k.toString();
@@ -105,7 +105,7 @@ function buttonPress(btn) {//main game function, executed every time a button is
 function createButtons() {//creates the buttons that the user clicks to guess a letter
     for(i = 0; i < alpha.length; i++){
         gsd = document.getElementById("guessed")
-        if(i == 13){
+        if(i === 13){
             //append <br> element to split up buttons
             gsd.append(document.createElement("br"));
         }
@@ -113,8 +113,6 @@ function createButtons() {//creates the buttons that the user clicks to guess a 
         newBtn.classList.add("letter-btn");
         newBtn.id = "b" + alpha[i];
         newBtn.setAttribute("onclick", "buttonPress('" + alpha[i].toString() + "');");
-        //newBtn.addEventListener("click", function(){buttonPress(alpha[i])});  //These two lines make no sense
-        //newBtn.onclick = function() {buttonPress(alpha[i])};                  //they should work, but don't.
         newBtn.innerHTML = "<p>" + alpha[i] + "</p>";
         gsd.append(newBtn);
     }
