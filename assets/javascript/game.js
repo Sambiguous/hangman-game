@@ -139,10 +139,6 @@ function compareArrays(arr1, arr2){ //check to see if 2 arrays are equal to each
     return true;
 }
 
-function pickSong() {//randomly selects a song from the songs array
-    return songs[Math.floor(Math.random() * songs.length)]
-};
-
 function createShadowArray(template) {//creates shadow of current round's answer. blanks are mapped to this shadow
     shadow = [];
     for(i = 0; i < template.length; i++) {
@@ -206,7 +202,6 @@ function clearBlanks() { // delete all child divs in the #blankContainer div
     while (words.firstChild) {
         words.removeChild(words.firstChild);
     };
-
 }
 
 function newGame() {//reset all the things and initialize a new game
@@ -222,17 +217,7 @@ function newGame() {//reset all the things and initialize a new game
 
 window.onload = function(){
         createButtons();
-        song = pickSong();
+        song = songs[Math.floor(Math.random() * songs.length)]
         setBoard(song);
         //document.getElementById("audio").play()
 };
-
-
-
-
-
-
-
-
-
-
