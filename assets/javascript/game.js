@@ -52,10 +52,10 @@ function fillBlanksAfterLoss(){//populates the blank spaces after a loss to show
 }
 
 function buttonPress(btn) {//main game function, executed every time a button is pressed
+    btn = btn.toUpperCase();
     var wrong = true;
 
-    if(round_over){return};
-    if(picked_array.includes(btn)){return};
+    if(round_over || picked_array.includes(btn) || alpha.indexOf(btn) === -1){return};
 
     for(i = 0; i < round_array.length; i++) {
         for(k = 0; k < round_array[i].length; k++) {
@@ -211,11 +211,16 @@ function newGame() {//reset all the things and initialize a new game
     document.getElementById("gallows").setAttribute("src", "assets/images/hangman.png");
     clearBlanks();
     resetButtons();
-    setBoard(pickSong());
+    setBoard(songs[Math.floor(Math.random() * songs.length)]);
 };
+
+function keyHandler(e){
+  buttonPress(e.key);
+}
 
 
 window.onload = function(){
+        window.addEventListener("keypress", keyHandler)
         createButtons();
         song = songs[Math.floor(Math.random() * songs.length)]
         setBoard(song);
