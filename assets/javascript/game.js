@@ -214,15 +214,12 @@ function newGame() {//reset all the things and initialize a new game
     setBoard(songs[Math.floor(Math.random() * songs.length)]);
 };
 
-function keyHandler(e){
-  buttonPress(e.key);
-}
-
-
 window.onload = function(){
-        window.addEventListener("keypress", keyHandler)
-        createButtons();
-        song = songs[Math.floor(Math.random() * songs.length)]
-        setBoard(song);
-        //document.getElementById("audio").play()
+    window.addEventListener("keypress", function(e){
+      buttonPress(e.key);
+    })
+    createButtons();
+    song = songs[Math.floor(Math.random() * songs.length)]
+    setBoard(song);
+    //document.getElementById("audio").play()
 };
